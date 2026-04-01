@@ -20,7 +20,11 @@ app.use((req, res, next) => {
 });
 
 function createEfiAgent() {
-  const certBuffer = Buffer.from(EFI_CERT_BASE64, "base64");
+  const cert = EFI_CERT_BASE64;
+  console.log('CERT LENGTH:', cert ? cert.length : 'VAZIO');
+  console.log('CERT INICIO:', cert ? cert.substring(0, 50) : 'VAZIO');
+  const certBuffer = Buffer.from(cert, "base64");
+  console.log('BUFFER SIZE:', certBuffer.length);
   return new https.Agent({ pfx: certBuffer, passphrase: "" });
 }
 
